@@ -1,17 +1,21 @@
-function getFullName(user: {firstname: string, lastname: string}): string {
-    return `${user.firstname} ${user.lastname}`;
+enum StatusCode {
+    SUCCESS = 1,
+    IN_PROCESS,
+    FAILED
+}
+
+const res: {
+    message: string,
+    statusCode: number
+} = {
+    message: 'Payment is successful',
+    statusCode: StatusCode.SUCCESS
 }
 
 
-const user = {
-    firstname: 'Ihar',
-    lastname: 'Haltsou',
-    city: 'Mogilev',
-    age: 38,
+function action(status: StatusCode) {
+
 }
 
-
-console.log(getFullName(user));
-
-
+action(StatusCode.IN_PROCESS);
 
