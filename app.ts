@@ -1,21 +1,25 @@
-enum StatusCode {
-    SUCCESS = 1,
-    IN_PROCESS,
-    FAILED
-}
-
-const res: {
-    message: string,
-    statusCode: number
-} = {
-    message: 'Payment is successful',
-    statusCode: StatusCode.SUCCESS
+interface User {
+    name: string,
+    password?: {
+        type: 'pri' | 'sec'
+    }
 }
 
 
-function action(status: StatusCode) {
-
+let user1: User = {
+    name: "Ihar"
 }
 
-action(StatusCode.IN_PROCESS);
+let user2: User = {
+    name: "John",
+    password: {
+        type: 'sec'
+    }
+}
 
+function testPass(user: User) {
+    console.log(user.password?.type);
+}
+
+testPass(user1);
+testPass(user2);
