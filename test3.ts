@@ -56,15 +56,29 @@ const req: IPaymentRequest = {
     to: 10,
 }
 
-let responses: (IResponseSuccess | IResponseFailed)[] = [
+type Res = IResponseSuccess | IResponseFailed;
+
+let responses: (Res)[] = [
     request(req),
     request2(req)
 ];
 
+function isResponseSuccess(res: Res): res is IResponseSuccess {
+    return res.status === PaymentStatus.SUCCESS;
+}
+
 responses.forEach(function (res) {
-    if (res.status === PaymentStatus.FAILED) {
-        console.error(res.data);
-    } else {
+    if (isResponseSuccess(res)) {
         console.log(res.data);
+    } else {
+        console.error(res.data);
     }
 });
+
+function getIdFromDatabase(res: Res): number {
+    if (isResponseSuccess(res)) {
+        return res.data.databaseId;
+    } else {
+        throw new Error(res.data.errorMessage);
+    }
+}
