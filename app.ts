@@ -1,32 +1,20 @@
 class User {
-    name: string;
-    age: number;
+    skills: string[] = [];
 
-    constructor();
-    constructor(name: string);
-    constructor(age: number);
-    constructor(name: string, age: number);
-    constructor(ageOrName?: string | number, age?: number) {
-        if (typeof ageOrName === "string") {
-            this.name = ageOrName;
-        }
-
-        if (typeof ageOrName === "number") {
-            this.age = ageOrName;
-        }
-
-        if (typeof age === "number") {
-            this.age = age;
+    addSkill(skill: string): void;
+    addSkill(skills: string[]): void;
+    addSkill(skills: string | string[]): void {
+        if (typeof skills == "string") {
+            this.skills.push(skills);
+        } else {
+            this.skills.push(...skills);
         }
     }
 }
 
-const user1 = new User(`Ihar`);
-const user2 = new User();
-const user3 = new User(33);
-const user4 = new User('John', 33);
+const user = new User();
 
-console.log({user1});
-console.log({user2});
-console.log({user3});
-console.log({user4});
+user.addSkill("BE");
+user.addSkill(["PM", "SA"]);
+
+console.log(user);
