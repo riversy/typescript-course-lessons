@@ -1,20 +1,37 @@
-class User {
-    skills: string[] = [];
+type PaymentStatus = 'new' | 'paid';
 
-    addSkill(skill: string): void;
-    addSkill(skills: string[]): void;
-    addSkill(skills: string | string[]): void {
-        if (typeof skills == "string") {
-            this.skills.push(skills);
-        } else {
-            this.skills.push(...skills);
+class Payment {
+    id: number;
+    status: PaymentStatus = 'new';
+
+    constructor(id: number) {
+        this.id = id;
+    }
+
+    pay() {
+        this.status = 'paid';
+    }
+}
+
+
+class PersistentPayment extends Payment {
+    databaseId: number;
+    paidAt: Date;
+
+    constructor() {
+        const id = Math.random();
+        super(id);
+    }
+
+    override pay(date?: Date) {
+        super.pay();
+        if (date) {
+            this.paidAt = date;
         }
     }
 }
 
-const user = new User();
 
-user.addSkill("BE");
-user.addSkill(["PM", "SA"]);
 
-console.log(user);
+console.log(new Payment(12));
+console.log(new PersistentPayment());
