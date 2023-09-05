@@ -1,8 +1,8 @@
 import {sortById} from "./sortById";
 
-it('should sort using numeric id', () => {
+it('should sort using numeric id asc', () => {
 
-    const expectedValue: Array<{id: number, name: string}> = [
+    const expectedValue: Array<{ id: number, name: string }> = [
         {
             id: 1,
             name: "One"
@@ -17,7 +17,28 @@ it('should sort using numeric id', () => {
         },
     ]
 
-    const value: Array<{id: number, name: string}> = [
+    const value: Array<{ id: number, name: string }> = [
+        {
+            id: 1,
+            name: "One"
+        },
+        {
+            id: 3,
+            name: "Three"
+        },
+        {
+            id: 2,
+            name: "Two"
+        },
+    ]
+
+    expect(sortById<{ id: number, name: string }>(value)).toEqual(expectedValue);
+});
+
+
+it('should sort using numeric id with defined asc', () => {
+
+    const expectedValue: Array<{ id: number, name: string }> = [
         {
             id: 1,
             name: "One"
@@ -32,5 +53,56 @@ it('should sort using numeric id', () => {
         },
     ]
 
-    expect(sortById<{id: number, name: string}>(value)).toEqual(expectedValue);
+    const value: Array<{ id: number, name: string }> = [
+        {
+            id: 1,
+            name: "One"
+        },
+        {
+            id: 3,
+            name: "Three"
+        },
+        {
+            id: 2,
+            name: "Two"
+        },
+    ]
+
+    expect(sortById<{ id: number, name: string }>(value, 'asc')).toEqual(expectedValue);
+});
+
+
+it('should sort using numeric id with defined desc', () => {
+
+    const expectedValue: Array<{ id: number, name: string }> = [
+        {
+            id: 3,
+            name: "Three"
+        },
+        {
+            id: 2,
+            name: "Two"
+        },
+        {
+            id: 1,
+            name: "One"
+        },
+    ]
+
+    const value: Array<{ id: number, name: string }> = [
+        {
+            id: 1,
+            name: "One"
+        },
+        {
+            id: 3,
+            name: "Three"
+        },
+        {
+            id: 2,
+            name: "Two"
+        },
+    ]
+
+    expect(sortById<{ id: number, name: string }>(value, 'desc')).toEqual(expectedValue);
 });
