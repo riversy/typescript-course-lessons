@@ -13,5 +13,8 @@
     },
     "scripts": {
         "test": "tsc && jest"
+    },
+    "dependencies": {
+        "reflect-metadata": "^0.1.13"
     }
 }
